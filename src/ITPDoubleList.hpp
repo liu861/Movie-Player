@@ -2,6 +2,7 @@
 #include <ostream>
 #include <sstream>
 #include <stdexcept>
+#include <iostream>
 
 template <typename T>
 class ITPDoubleList
@@ -133,7 +134,18 @@ public:
     // Returns: Nothing
     ITPDoubleList(const ITPDoubleList& other)
     {
-        // TODO: Implement
+        mSize = 0;
+        mHead = nullptr;
+        mTail = nullptr;
+        Node* temp = other.mHead;
+        //while temp is not null
+        while(temp != nullptr)
+        {
+            //push back temps data into the list
+            push_back(temp->mData);
+            //advance temp to next node
+            temp = temp->mNext;
+        }
 	}
     
     // Function: Destructor
@@ -142,7 +154,7 @@ public:
     // Returns: Nothing
     ~ITPDoubleList()
     {
-        // TODO: Implement
+        clear();
 	}
     
     // Function: clear
@@ -151,7 +163,10 @@ public:
     // Returns: Nothing
     void clear()
     {
-        // TODO: Implement
+        while(mSize > 0)
+        {
+            pop_front();
+        }
 	}
     
     // Assignment Operator
@@ -162,7 +177,21 @@ public:
     ITPDoubleList& operator=(const ITPDoubleList& other)
     {
 		// TODO: Implement
-		return *(new ITPDoubleList()); // FIX RETURN VALUE
+        //call clear function
+        clear();
+        //create temp node to point to head of other
+        Node* temp = new Node;
+        temp = other.mHead;
+        //while temp is not null
+        while(temp != nullptr)
+        {
+            //push back temp's data into this list
+            push_back(temp->mData);
+            //advance temp to the next node
+            temp = temp->mNext;
+        }
+        //operator= returns *this
+        return *this; // FIX RETURN VALUE
     }
     
     // Function: size
@@ -172,7 +201,7 @@ public:
     unsigned size() const
     {
 		// TODO: Implement
-		return -1; // FIX RETURN VALUE
+		return mSize;
     }
     
     // Function: push_front
@@ -181,7 +210,28 @@ public:
     // Returns: Nothing
     void push_front(const T& value)
     {
-        // TODO: Implement
+        //dynamically allocate new node
+        Node* temp = new Node;
+        //set data to value
+        temp->mData = value;
+        //set node prev to null (because this will be new head)
+        temp->mPrev = nullptr;
+        //set node next to current head
+        temp->mNext = mHead;
+        if(mSize == 0)
+        {
+            //set tail to new node also
+            mTail = temp;
+        }
+        else
+        {
+            //set current head prev to new node
+            mHead->mPrev = temp;
+        }
+        //set new head to new node
+        mHead = temp;
+        //increment size
+        mSize++;
     }
     
     // Function: front
@@ -190,8 +240,11 @@ public:
     // Returns: Value of the node at the front of the list
     T& front()
     {
-		// TODO: Implement
-		return *(new T()); // FIX RETURN VALUE
+        if(mSize == 0)
+        {
+            throw std::out_of_range("The size of the list is 0!");
+        }
+		return mHead->mData;
     }
     
     // Function: pop_front
@@ -200,7 +253,32 @@ public:
     // Returns: None
     void pop_front()
     {
-        // TODO: Implement
+        if(mSize == 0)
+        {
+            throw std::out_of_range("Ths size of the list is 0!");
+        }
+        else if(mSize == 1)
+        {
+            //delete head node
+            delete mHead;
+            //set head and tail to null, size to 0
+            mHead = nullptr;
+            mTail = nullptr;
+            mSize = 0;
+        }
+        else
+        {
+            //create temp node, set to node after head
+            Node* temp = mHead->mNext;
+            //delete current head
+            delete mHead;
+            //new temp node is now head
+            mHead = temp;
+            //head previous is null
+            mHead->mPrev = nullptr;
+            //decrement size
+            mSize--;
+        }
     }
     
     // Function: push_back
@@ -209,7 +287,29 @@ public:
     // Returns: Nothing
     void push_back(const T& value)
     {
-        // TODO: Implement
+        //dynamically allocate new temp node
+        Node* temp = new Node;
+        //set its data to value
+        temp->mData = value;
+        //set prev to current tail
+        temp->mPrev = mTail;
+        //set next to null (since this will be the new tail)
+        temp->mNext = nullptr;
+        if(mSize == 0)
+        {
+            //head is also new node
+            mHead = temp;
+        }
+        else
+        {
+            //set next of current tail to new node
+            mTail->mNext = temp;
+        }
+        //set tail to new node
+        mTail = temp;
+        //increment size
+        mSize++;
+        
     }
     
     // Function: front
@@ -218,8 +318,11 @@ public:
     // Returns: Value of the node at the front of the list
     T& back()
     {
-		// TODO: Implement
-		return *(new T()); // FIX RETURN VALUE
+		if(mSize == 0)
+        {
+            throw std::out_of_range("The size of the list is 0!");
+        }
+        return mTail->mData;
     }
     
     // Function: pop_back
@@ -228,7 +331,32 @@ public:
     // Returns: None
     void pop_back()
     {
-        // TODO: Implement
+        if(mSize == 0)
+        {
+            throw std::out_of_range("Ths size of the list is 0!");
+        }
+        else if(mSize == 1)
+        {
+            //delete tail node
+            delete mTail;
+            //set head and tail to null, size to 0
+            mHead = nullptr;
+            mTail = nullptr;
+            mSize = 0;
+        }
+        else
+        {
+            //create temp node, set to node before tail
+            Node* temp = mTail->mPrev;
+            //delete current tail
+            delete mTail;
+            //new temp node is now tail
+            mTail = temp;
+            //new tail next is null
+            mTail->mNext = nullptr;
+            //decrement size
+            mSize--;
+        }
 	}
     
     // Function: begin
@@ -279,8 +407,21 @@ public:
     // Output: Stream after values are written
     friend std::ostream& operator<<(std::ostream& os, const ITPDoubleList<T>& list)
     {
-        // TODO: Implement
-        return os; // FIX RETURN VALUE
+        os << "{";
+        //create temp node set to head of list
+        Node* temp = list.mHead;
+        while(temp != nullptr)
+        {
+            os << temp->mData;
+            if(temp != list.mTail)
+            {
+                os << ", ";
+            }
+            //set temp to next node
+            temp = temp->mNext;
+        }
+        os << "}";
+        return os;
     }
     
     // Function: toString
@@ -289,8 +430,10 @@ public:
     // Output: String (in the format as the ostream)
     std::string toString() const
     {
-		// TODO: Implement
-		return ""; // FIX RETURN VALUE
+        std::stringstream stream;
+        //write to stream this list
+        stream << *this;
+        return stream.str();
     }
     
     // Function: toReverseString
@@ -299,7 +442,21 @@ public:
     // Output: String in reverse
     std::string toReverseString() const
     {
-		// TODO: Implement
-		return ""; // FIX RETURN VALUE
+        std::stringstream stream;
+        stream << "{";
+        //create temp node set to tail of list
+        Node* temp = mTail;
+        while(temp != nullptr)
+        {
+            stream << temp->mData;
+            if(temp != mHead)
+            {
+                stream << ", ";
+            }
+            //set temp to previous node
+            temp = temp->mPrev;
+        }
+        stream << "}";
+        return stream.str();
     }
 };
