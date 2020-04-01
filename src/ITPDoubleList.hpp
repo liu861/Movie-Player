@@ -365,8 +365,8 @@ public:
     // Returns: Iterator pointing to beginning of list
     Iterator begin() const
     {
-		// TODO: Implement
-		return *(new Iterator); // FIX RETURN VALUE
+		// TODO: ImplementC
+		return Iterator(mHead); // FIX RETURN VALUE
     }
     
     // Function: end
@@ -376,7 +376,7 @@ public:
     Iterator end() const
     {
 		// TODO: Implement
-		return *(new Iterator); // FIX RETURN VALUE
+		return Iterator(mTail);
     }
 
 	// Function: erase
@@ -385,8 +385,40 @@ public:
 	// Returns: A new iterator pointing to the node after the removed item
     Iterator erase(Iterator& i)
     {
-		// TODO: Implement
-		return *(new Iterator); // FIX RETURN VALUE
+		//if iterator is invalid -> error
+        if(i == nullptr)
+        {
+            throw std::invalid_argument("Iterator is invalid!");
+        }
+        //if iterator is at begin
+        else if(i == begin())
+        {
+            pop_front();
+            return begin();
+        }
+        //if iterator is at end
+        else if(i == end())
+        {
+            pop_back();
+            return end();
+        }
+        else
+        {
+            //make before, after, and toDel pointers
+            Node* before = i.mCurr->mNext;
+            Node* after = i.mCurr->mPrev;
+            Node* toDel = i.mCurr;
+            //delete toDel
+            delete toDel;
+            //set before's next to after
+            before->mNext = after;
+            //set after's previous to before
+            after->mPrev = before;
+            //decrement size
+            mSize--;
+            //return iterator to after
+            return Iterator(after);
+        }
     }
 
 	// Function: insert
@@ -395,8 +427,46 @@ public:
 	// Returns: A new iterator pointing to the inserted value
     Iterator insert(Iterator& i, const T& val)
     {
-		// TODO: Implement
-		return *(new Iterator); // FIX RETURN VALUE
+        //if iterator is invalid -> error
+        if(i == nullptr)
+        {
+            throw std::invalid_argument("Iterator is invalid!");
+        }
+        //if iterator is at begin
+        else if(i == begin())
+        {
+            push_front(val);
+            return begin();
+        }
+        //if iterator is at end
+        else if(i == end())
+        {
+            push_back(val);
+            //return iterator to last element (not end)
+            return Iterator(mTail);
+        }
+        else
+        {
+            //create before and after pointers
+            Node* before = i.mCurr;
+            Node* after = i.mCurr->mPrev;
+            //dynamically allocate new node
+            Node* temp = new Node;
+            //set its data to next value
+            temp->mData = val;
+            //set its previous to before
+            temp->mPrev = before;
+            //set its next to after
+            temp->mNext = after;
+            //set before's next to the new node
+            before->mNext = temp;
+            //set after's prev to the new node
+            after->mPrev = temp;
+            //increment size
+            mSize++;
+            //return iterator pointing to the inserted node
+            return Iterator(temp);
+        }
 	}
     
 public:
