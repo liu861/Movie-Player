@@ -11,7 +11,12 @@
 // Returns: Nothing
 MoviePlayer::MoviePlayer(std::string filmName)
 {
-	// TODO: Implement
+    //set appropriate member variables
+    mFilmName = filmName;
+    //ensure tape is empty
+    mFilm.clear();
+    //call member function loadTape
+    loadTape();
 }
 
 // Function: Destructor
@@ -20,7 +25,8 @@ MoviePlayer::MoviePlayer(std::string filmName)
 // Returns: Nothing
 MoviePlayer::~MoviePlayer()
 {
-	// TODO: Implement
+    //ensure tape is empty
+    mFilm.clear();
 }
 
 // Function: goFwrd
@@ -31,7 +37,13 @@ MoviePlayer::~MoviePlayer()
 // Returns: Nothing
 void MoviePlayer::goFwrd()
 {
-	// TODO: Implement
+    if(pos->mNext != nullptr)
+    {
+        //move tape forward 1 frame
+        pos++;
+        //increment currFrameNum counter
+        currFrameNum++;
+    }
 }
 
 // Function: goBack
@@ -42,7 +54,13 @@ void MoviePlayer::goFwrd()
 // Returns: Nothing
 void MoviePlayer::goBack()
 {
-	// TODO: Implement
+    if(pos->mPrev != nullptr)
+    {
+        //move tape back 1 fram
+        pos--;
+        //decrement currFrameNum counter
+        currFrameNum--;
+    }
 }
 
 // Function: rewind
@@ -51,7 +69,10 @@ void MoviePlayer::goBack()
 // Returns: Nothing
 void MoviePlayer::rewind()
 {
-	// TODO: Implement
+    //start tape over again, move current frame to begin
+    pos = mFilm.begin();
+    //keep track of currFrameNum
+    currFrameNum = 1;
 }
 
 // Function: getCurrFrame
@@ -62,7 +83,7 @@ void MoviePlayer::rewind()
 std::string MoviePlayer::getCurrFrame()
 {
 	// TODO: Implement
-	return ""; // FIX RETURN VALUE
+    return "";
 }
 
 // Function: delCurrFrame
@@ -72,7 +93,13 @@ std::string MoviePlayer::getCurrFrame()
 // Returns: Nothing
 void MoviePlayer::delCurrFrame()
 {
-	// TODO: Implement
+    //delete current frame
+    //move tape forward by 1 fram
+    if(pos->mNext != nullptr)
+    {
+        //erase returns an iterator to after, so store this back in pos
+        pos = mFilm.erase(pos);
+    }
 }
 
 // Function: copyCurrFrame
@@ -82,7 +109,10 @@ void MoviePlayer::delCurrFrame()
 // Returns: Nothing
 void MoviePlayer::copyCurrFrame()
 {
-	// TODO: Implement
+	//copy current frame, place before current fram
+    //move tape to newly added frame
+    //insert returns an iterator pointing to the inserted value
+    pos = mFilm.insert(pos, *pos);
 }
 
 // Function: getCurrFrameNum
@@ -91,8 +121,7 @@ void MoviePlayer::copyCurrFrame()
 // Returns: Number of frames that have been viewed
 unsigned MoviePlayer::getCurrFrameNum() const
 {
-	// TODO: Implement
-	return -1; // FIX RETURN VALUE
+    return currFrameNum;
 }
 
 // Function: getNumFrames
@@ -101,8 +130,7 @@ unsigned MoviePlayer::getCurrFrameNum() const
 // Returns: The overall number of frames in the movie
 unsigned int MoviePlayer::getNumFrames() const
 {
-	// TODO: Implement
-	return -1; // FIX RETURN VALUE
+    return mFilm.size();
 }
 
 // Function: getFrameSize
@@ -112,8 +140,7 @@ unsigned int MoviePlayer::getNumFrames() const
 // Returns: The value stored in FRAMESIZE
 unsigned int MoviePlayer::getFrameSize() const
 {
-	// TODO: Implement
-	return -1; // FIX RETURN VALUE
+    return FRAMESIZE;
 }
 
 // Function: loadTape
@@ -123,6 +150,23 @@ unsigned int MoviePlayer::getFrameSize() const
 // Returns: Nothing
 void MoviePlayer::loadTape()
 {
-	// TODO: Implement
+    //TO DO STILL WORK IN PROGRESS
+    //open inputted text file
+    std::ifstream ifile(mFilmName);
+    if(!ifile.is_open())
+    {
+        throw std::invalid_argument("File not found");
+    }
+    else
+    {
+        //parse out text file
+        while(!ifile.eof())
+        {
+            std::string curr;
+            std::getline(ifile, curr);
+            //makes up frames
+            //fill ITPDoubleList with animations
+        }
+    }
 }
 
