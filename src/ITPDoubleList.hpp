@@ -198,7 +198,7 @@ public:
             //advance temp to the next node
             temp = temp->mNext;
         }
-        delete temp;
+        free(temp);
         //operator= returns *this
         return *this;
     }
