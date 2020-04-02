@@ -82,8 +82,7 @@ void MoviePlayer::rewind()
 // Returns: String with the current "frame"
 std::string MoviePlayer::getCurrFrame()
 {
-	// TODO: Implement
-    return "";
+    return *pos;
 }
 
 // Function: delCurrFrame
@@ -177,9 +176,10 @@ void MoviePlayer::loadTape()
                 //add each line to frames
                 frames += (curr + " \n");
             }
+            //num = how many times to insert frame into list
             for(int i = 0; i < displayTime; i++)
             {
-                //fill ITPDoubleList with image
+                //fill ITPDoubleList with images
                 mFilm.push_back(frames);;
             }
         }
