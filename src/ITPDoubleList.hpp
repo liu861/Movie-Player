@@ -198,7 +198,6 @@ public:
             //advance temp to the next node
             temp = temp->mNext;
         }
-        free(temp);
         //operator= returns *this
         return *this;
     }
@@ -392,12 +391,12 @@ public:
     Iterator erase(Iterator& i)
     {
 		//if iterator is invalid -> error
-        if(i == nullptr)
+        /*if(i == nullptr)
         {
             throw std::out_of_range("Iterator is invalid!");
-        }
+        }*/
         //if iterator is at begin
-        else if(i == begin())
+        if(i == begin())
         {
             pop_front();
             return begin();
@@ -434,10 +433,10 @@ public:
     Iterator insert(Iterator& i, const T& val)
     {
         //if iterator is invalid
-        if(i == nullptr)
+        /*if(i == nullptr)
         {
             throw std::out_of_range("Iterator is invalid!");
-        }
+        }*/
         //if iterator is at begin
         if(i == begin())
         {
