@@ -397,12 +397,14 @@ public:
         if(i == begin())
         {
             pop_front();
+            //return begin
             return begin();
         }
         //if iterator is at tail
-        else if(end() == nullptr)
+        else if(i == mTail)
         {
             pop_back();
+            //return end
             return end();
         }
         else
@@ -439,6 +441,7 @@ public:
         if(i == begin())
         {
             push_front(val);
+            //return begin
             return begin();
         }
         //if iterator is at end
