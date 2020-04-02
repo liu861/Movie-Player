@@ -149,7 +149,6 @@ unsigned int MoviePlayer::getFrameSize() const
 // Returns: Nothing
 void MoviePlayer::loadTape()
 {
-    //TO DO STILL WORK IN PROGRESS
     //open inputted text file
     std::ifstream ifile(mFilmName);
     if(!ifile.is_open())

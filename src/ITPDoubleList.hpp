@@ -365,7 +365,6 @@ public:
     // Returns: Iterator pointing to beginning of list
     Iterator begin() const
     {
-		// TODO: ImplementC
 		return Iterator(mHead); // FIX RETURN VALUE
     }
     
@@ -375,8 +374,7 @@ public:
     // Returns: Iterator pointing to end of list
     Iterator end() const
     {
-		// TODO: Implement
-		return Iterator(mTail);
+		return Iterator(mTail->mNext);
     }
 
 	// Function: erase

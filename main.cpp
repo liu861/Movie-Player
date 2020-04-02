@@ -11,7 +11,6 @@
 // Returns: Nothing
 void getCurrFrame(GTerminal& term, MoviePlayer& mp)
 {
-    //use clear and append functions of GTerminal
     //add lines of text from MoviePlayer's getCurrFrame to the terminal
     term.clear();
     term.appendText(mp.getCurrFrame());
