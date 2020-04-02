@@ -39,79 +39,84 @@ public:
         // Constructors
         Iterator()
         {
-            // TODO: Implement
+            //set current to null
+            mCurr = nullptr;
         }
         
         Iterator(Node* inCurr)
         {
-            // TODO: Implement
+            //set current to input
+            mCurr = inCurr;
 		}
         
         Iterator(const Iterator& src)
         {
-            // TODO: Implement
+            mCurr = src.mCurr;
         }
         
         // Assignment
         Iterator& operator=(const Iterator& src)
         {
-			// TODO: Implement
-			return *(new Iterator()); // FIX RETURN VALUE
-		}
+            mCurr = src.mCurr;
+            return *this;
+        }
         
         // Incrementors / Decrementors
         // ++i
         Iterator& operator++()
         {
-			// TODO: Implement
-			return *(new Iterator()); // FIX RETURN VALUE
+            mCurr = mCurr->mNext;
+			return *this;
 		}
         
         // i++
         Iterator operator++(int)
         {
-			// TODO: Implement
-			return *(new Iterator()); // FIX RETURN VALUE
+            Iterator plus(*this);
+            mCurr = mCurr->mNext;
+			return plus;
 		}
         
         // --i
         Iterator& operator--()
         {
 			// TODO: Implement
-			return *(new Iterator()); // FIX RETURN VALUE
+            mCurr = mCurr->mPrev;
+            return *this;
 		}
         
         // i--
         Iterator operator--(int)
         {
 			// TODO: Implement
-			return *(new Iterator()); // FIX RETURN VALUE
+            Iterator minus(*this);
+            mCurr = mCurr->mPrev;
+			return minus;
 		}
         
         // Dereference
         T& operator*() const
         {
-			// TODO: Implement
-			return *(new T()); // FIX RETURN VALUE
+			//return data at iterator
+			return mCurr->mData;
 		}
         
         Node* operator->() const
         {
-			// TODO: Implement
-			return new Node(); // FIX RETURN VALUE
+            return mCurr;
         }
         
         // Comparison
         bool operator==(const Iterator& rhs) const
         {
-			// TODO: Implement
-			return false; // FIX RETURN VALUE
+            //if iterator equals rhs
+            return mCurr == rhs.mCurr;
         }
         
         bool operator!=(const Iterator& rhs) const
         {
-			// TODO: Implement
-			return false; // FIX RETURN VALUE
+            //if iterator does not equal rhs
+            return mCurr != rhs.mCurr;
         }
     };
     
@@ -200,7 +205,6 @@ public:
     // Returns: size of the list
     unsigned size() const
     {
-		// TODO: Implement
 		return mSize;
     }
     
@@ -384,9 +388,9 @@ public:
     Iterator erase(Iterator& i)
     {
 		//if iterator is invalid -> error
-        if(i == nullptr)
+        if(&i == nullptr)
         {
-            throw std::invalid_argument("Iterator is invalid!");
+            throw std::out_of_range("Iterator is invalid!");
         }
         //if iterator is at begin
         else if(i == begin())
@@ -425,13 +429,13 @@ public:
 	// Returns: A new iterator pointing to the inserted value
     Iterator insert(Iterator& i, const T& val)
     {
-        //if iterator is invalid -> error
-        if(i == nullptr)
+        //if iterator is invalid
+        if(&i == nullptr)
         {
-            throw std::invalid_argument("Iterator is invalid!");
+            throw std::out_of_range("Iterator is invalid!");
         }
         //if iterator is at begin
-        else if(i == begin())
+        if(i == begin())
         {
             push_front(val);
             return begin();
@@ -519,7 +523,7 @@ public:
             stream << temp->mData;
             if(temp != mHead)
             {
-                stream << ", ";
+                stream << ",";
             }
             //set temp to previous node
             temp = temp->mPrev;
