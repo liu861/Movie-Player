@@ -163,9 +163,25 @@ void MoviePlayer::loadTape()
         while(!ifile.eof())
         {
             std::string curr;
+            //each frame begins with separator line
+            //get line with number that indicates how long frame should be shown
             std::getline(ifile, curr);
-            //makes up frames
-            //fill ITPDoubleList with animations
+            //convert that to an int
+            int displayTime = atoi(curr.c_str());
+            //the following 13 lines makes up image to display
+            std::string frames = "";
+            for(int i = 0; i < FRAMESIZE; i++)
+            {
+                //get each line of frame
+                std::getline(ifile, curr);
+                //add each line to frames
+                frames += (curr + " \n");
+            }
+            for(int i = 0; i < displayTime; i++)
+            {
+                //fill ITPDoubleList with image
+                mFilm.push_back(frames);;
+            }
         }
     }
 }
