@@ -93,11 +93,12 @@ std::string MoviePlayer::getCurrFrame()
 void MoviePlayer::delCurrFrame()
 {
     //delete current frame
-    //move tape forward by 1 fram
+    //move tape forward by 1 frame
     if(pos->mNext != nullptr)
     {
         //erase returns an iterator to after, so store this back in pos
         pos = mFilm.erase(pos);
+        currFrameNum++;
     }
 }
 
@@ -112,6 +113,7 @@ void MoviePlayer::copyCurrFrame()
     //move tape to newly added frame
     //insert returns an iterator pointing to the inserted value
     pos = mFilm.insert(pos, *pos);
+    currFrameNum--;
 }
 
 // Function: getCurrFrameNum
