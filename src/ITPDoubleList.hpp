@@ -172,6 +172,9 @@ public:
         {
             pop_front();
         }
+        mSize = 0;
+        mHead = nullptr;
+        mTail = nullptr;
 	}
     
     // Assignment Operator
@@ -388,7 +391,7 @@ public:
     Iterator erase(Iterator& i)
     {
 		//if iterator is invalid -> error
-        if(&i == nullptr)
+        if(i == nullptr)
         {
             throw std::out_of_range("Iterator is invalid!");
         }
@@ -430,7 +433,7 @@ public:
     Iterator insert(Iterator& i, const T& val)
     {
         //if iterator is invalid
-        if(&i == nullptr)
+        if(i == nullptr)
         {
             throw std::out_of_range("Iterator is invalid!");
         }
