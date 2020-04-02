@@ -184,12 +184,10 @@ public:
     // Returns: *this
     ITPDoubleList& operator=(const ITPDoubleList& other)
     {
-		// TODO: Implement
         //call clear function
         clear();
         //create temp node to point to head of other
-        Node* temp = new Node;
-        temp = other.mHead;
+        Node* temp = other.mHead;
         //while temp is not null
         while(temp != nullptr)
         {
