@@ -198,8 +198,9 @@ public:
             //advance temp to the next node
             temp = temp->mNext;
         }
+        delete temp;
         //operator= returns *this
-        return *this; // FIX RETURN VALUE
+        return *this;
     }
     
     // Function: size
