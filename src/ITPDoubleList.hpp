@@ -401,8 +401,8 @@ public:
             pop_front();
             return begin();
         }
-        //if iterator is at end
-        else if(i == end())
+        //if iterator is at tail
+        else if(end() == nullptr)
         {
             pop_back();
             return end();
