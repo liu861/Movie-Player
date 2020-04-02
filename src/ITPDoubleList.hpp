@@ -483,7 +483,7 @@ public:
             os << temp->mData;
             if(temp != list.mTail)
             {
-                os << ", ";
+                os << ",";
             }
             //set temp to next node
             temp = temp->mNext;
