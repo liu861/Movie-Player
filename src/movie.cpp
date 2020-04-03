@@ -96,7 +96,7 @@ void MoviePlayer::delCurrFrame()
 {
     //delete current frame
     //move tape forward by 1 frame
-    if(pos->mNext != nullptr)
+    if(pos->mNext)
     {
         //erase returns an iterator to after, so store this back in pos
         pos = mFilm.erase(pos);
@@ -195,5 +195,6 @@ void MoviePlayer::loadTape()
             }
         }
     }
+    ifile.close();
 }
 
