@@ -14,6 +14,7 @@ MoviePlayer::MoviePlayer(std::string filmName)
     //set appropriate member variables
     mFilmName = filmName;
     currFrameNum = 1;
+    pos = mFilm.begin();
     //ensure tape is empty
     mFilm.clear();
     //call member function loadTape
@@ -179,6 +180,10 @@ void MoviePlayer::loadTape()
                 if(line.back() == '\\')
                 {
                     line += " ";
+                }
+                if(ifile.eof())
+                {
+                    break;
                 }
                 frame += (line + "\n");
             }
