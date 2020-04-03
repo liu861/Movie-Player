@@ -170,19 +170,19 @@ void MoviePlayer::loadTape()
             //convert that to an int
             int displayTime = atoi(line.c_str());
             //the following 13 lines makes up image to display
-            std::string frames = "";
+            std::string frame = "";
             for(int i = 0; i < FRAMESIZE; i++)
             {
                 //get each line of frame
                 std::getline(ifile, line);
                 //add each line to frames
-                frames += (line + "\n");
+                frame += (line + " \n");
             }
             //num = how many times to insert frame into list
             for(int i = 0; i < displayTime; i++)
             {
                 //fill ITPDoubleList with images
-                mFilm.push_back(frames);;
+                mFilm.push_back(frame);;
             }
         }
     }
