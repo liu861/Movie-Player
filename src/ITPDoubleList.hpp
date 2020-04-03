@@ -451,8 +451,8 @@ public:
         else
         {
             //create before and after pointers
-            Node* before = i.mCurr;
-            Node* after = i.mCurr->mPrev;
+            Node* after = i.mCurr;
+            Node* before = i.mCurr->mPrev;
             //dynamically allocate new node
             Node* temp = new Node;
             //set its data to next value
