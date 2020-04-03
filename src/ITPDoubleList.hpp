@@ -407,8 +407,8 @@ public:
         else
         {
             //make before, after, and toDel pointers
-            Node* before = i.mCurr->mNext;
-            Node* after = i.mCurr->mPrev;
+            Node* before = i.mCurr->mPrev;
+            Node* after = i.mCurr->mNext;
             Node* toDel = i.mCurr;
             //delete toDel
             delete toDel;
@@ -451,8 +451,8 @@ public:
         else
         {
             //create before and after pointers
-            Node* after = i.mCurr;
             Node* before = i.mCurr->mPrev;
+            Node* after = i.mCurr;
             //dynamically allocate new node
             Node* temp = new Node;
             //set its data to next value
