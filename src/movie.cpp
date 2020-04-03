@@ -176,7 +176,11 @@ void MoviePlayer::loadTape()
                 //get each line of frame
                 std::getline(ifile, line);
                 //add each line to frames
-                frame += (line + " \n");
+                if(line.back() == '\\')
+                {
+                    line += " ";
+                }
+                frame += (line + "\n");
             }
             //num = how many times to insert frame into list
             for(int i = 0; i < displayTime; i++)
