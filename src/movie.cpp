@@ -13,6 +13,7 @@ MoviePlayer::MoviePlayer(std::string filmName)
 {
     //set appropriate member variables
     mFilmName = filmName;
+    currFrameNum = 1;
     //ensure tape is empty
     mFilm.clear();
     //call member function loadTape
