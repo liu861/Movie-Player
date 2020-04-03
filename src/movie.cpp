@@ -39,7 +39,7 @@ MoviePlayer::~MoviePlayer()
 // Returns: Nothing
 void MoviePlayer::goFwrd()
 {
-    if(pos->mNext != nullptr)
+    if(pos->mNext)
     {
         //increment currFrameNum counter
         currFrameNum++;
@@ -56,7 +56,7 @@ void MoviePlayer::goFwrd()
 // Returns: Nothing
 void MoviePlayer::goBack()
 {
-    if(pos->mPrev != nullptr)
+    if(pos->mPrev)
     {
         //decrement currFrameNum counter
         currFrameNum--;
