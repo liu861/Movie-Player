@@ -163,20 +163,20 @@ void MoviePlayer::loadTape()
         //parse out text file
         while(!ifile.eof())
         {
-            std::string curr;
+            std::string line;
             //each frame begins with separator line
             //get line with number that indicates how long frame should be shown
-            std::getline(ifile, curr);
+            std::getline(ifile, line);
             //convert that to an int
-            int displayTime = atoi(curr.c_str());
+            int displayTime = atoi(line.c_str());
             //the following 13 lines makes up image to display
             std::string frames = "";
             for(int i = 0; i < FRAMESIZE; i++)
             {
                 //get each line of frame
-                std::getline(ifile, curr);
+                std::getline(ifile, line);
                 //add each line to frames
-                frames += (curr + " \n");
+                frames += (line + "\n");
             }
             //num = how many times to insert frame into list
             for(int i = 0; i < displayTime; i++)
