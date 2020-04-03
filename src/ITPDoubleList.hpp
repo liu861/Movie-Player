@@ -172,9 +172,6 @@ public:
         {
             pop_front();
         }
-        mSize = 0;
-        mHead = nullptr;
-        mTail = nullptr;
 	}
     
     // Assignment Operator
@@ -370,7 +367,7 @@ public:
     // Returns: Iterator pointing to beginning of list
     Iterator begin() const
     {
-		return Iterator(mHead); // FIX RETURN VALUE
+		return Iterator(mHead);
     }
     
     // Function: end
