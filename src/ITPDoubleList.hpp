@@ -386,12 +386,12 @@ public:
     Iterator erase(Iterator& i)
     {
 		//if iterator is invalid -> error
-        /*if(i == nullptr)
+        if(i == nullptr)
         {
             throw std::out_of_range("Iterator is invalid!");
-        }*/
+        }
         //if iterator is at begin
-        if(i == begin())
+        else if(i == begin())
         {
             pop_front();
             //return begin
@@ -430,12 +430,12 @@ public:
     Iterator insert(Iterator& i, const T& val)
     {
         //if iterator is invalid
-        /*if(i == nullptr)
+        if(i == nullptr)
         {
             throw std::out_of_range("Iterator is invalid!");
-        }*/
+        }
         //if iterator is at begin
-        if(i == begin())
+        else if(i == begin())
         {
             push_front(val);
             //return begin
