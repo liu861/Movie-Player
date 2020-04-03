@@ -15,7 +15,6 @@ MoviePlayer::MoviePlayer(std::string filmName)
     mFilmName = filmName;
     //ensure tape is empty
     mFilm.clear();
-    currFrameNum = 1;
     //call member function loadTape
     loadTape();
 }
@@ -28,7 +27,6 @@ MoviePlayer::~MoviePlayer()
 {
     //ensure tape is empty
     mFilm.clear();
-    currFrameNum = 1;
 }
 
 // Function: goFwrd
