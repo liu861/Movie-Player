@@ -183,6 +183,7 @@ void MoviePlayer::loadTape()
                 }
                 if(ifile.eof())
                 {
+                    std::string frame = "";
                     break;
                 }
                 frame += (line + "\n");
