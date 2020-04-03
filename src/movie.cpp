@@ -191,6 +191,10 @@ void MoviePlayer::loadTape()
             //num = how many times to insert frame into list
             for(int i = 0; i < displayTime; i++)
             {
+                if(frame == "")
+                {
+                    break;
+                }
                 //fill ITPDoubleList with images
                 mFilm.push_back(frame);;
             }
