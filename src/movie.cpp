@@ -15,6 +15,7 @@ MoviePlayer::MoviePlayer(std::string filmName)
     mFilmName = filmName;
     //ensure tape is empty
     mFilm.clear();
+    currFrameNum = 1;
     //call member function loadTape
     loadTape();
 }
@@ -27,6 +28,7 @@ MoviePlayer::~MoviePlayer()
 {
     //ensure tape is empty
     mFilm.clear();
+    currFrameNum = 1;
 }
 
 // Function: goFwrd
@@ -98,7 +100,6 @@ void MoviePlayer::delCurrFrame()
     {
         //erase returns an iterator to after, so store this back in pos
         pos = mFilm.erase(pos);
-        currFrameNum++;
     }
 }
 
@@ -113,7 +114,6 @@ void MoviePlayer::copyCurrFrame()
     //move tape to newly added frame
     //insert returns an iterator pointing to the inserted value
     pos = mFilm.insert(pos, *pos);
-    currFrameNum--;
 }
 
 // Function: getCurrFrameNum
