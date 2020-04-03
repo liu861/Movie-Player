@@ -11,9 +11,12 @@
 // Returns: Nothing
 void getCurrFrame(GTerminal& term, MoviePlayer& mp)
 {
-    //add lines of text from MoviePlayer's getCurrFrame to the terminal
+    //use clear and appendtext
     term.clear();
-    term.appendText(mp.getCurrFrame());
+    //current frame
+    std::string frame = mp.getCurrFrame();
+    //add lines of text from MoviePlayer's getCurrFrame to the terminal
+    term.appendText(frame);
 }
 
 int main(int argc, const char* argv[])

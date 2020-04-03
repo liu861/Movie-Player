@@ -39,10 +39,10 @@ void MoviePlayer::goFwrd()
 {
     if(pos->mNext != nullptr)
     {
-        //move tape forward 1 frame
-        pos++;
         //increment currFrameNum counter
         currFrameNum++;
+        //move tape forward 1 frame
+        pos++;
     }
 }
 
@@ -56,10 +56,10 @@ void MoviePlayer::goBack()
 {
     if(pos->mPrev != nullptr)
     {
-        //move tape back 1 fram
-        pos--;
         //decrement currFrameNum counter
         currFrameNum--;
+        //move tape back by 1 frame
+        pos--;
     }
 }
 
@@ -71,7 +71,7 @@ void MoviePlayer::rewind()
 {
     //start tape over again, move current frame to begin
     pos = mFilm.begin();
-    //keep track of currFrameNum
+    //keep track of currFrameNum, set to 1 at beginning
     currFrameNum = 1;
 }
 
@@ -98,6 +98,7 @@ void MoviePlayer::delCurrFrame()
     {
         //erase returns an iterator to after, so store this back in pos
         pos = mFilm.erase(pos);
+        currFrameNum++;
     }
 }
 
@@ -108,10 +109,11 @@ void MoviePlayer::delCurrFrame()
 // Returns: Nothing
 void MoviePlayer::copyCurrFrame()
 {
-	//copy current frame, place before current fram
+	//copy current frame, place before current frame
     //move tape to newly added frame
     //insert returns an iterator pointing to the inserted value
     pos = mFilm.insert(pos, *pos);
+    currFrameNum--;
 }
 
 // Function: getCurrFrameNum
@@ -120,6 +122,7 @@ void MoviePlayer::copyCurrFrame()
 // Returns: Number of frames that have been viewed
 unsigned MoviePlayer::getCurrFrameNum() const
 {
+    //get current frame number
     return currFrameNum;
 }
 
@@ -129,6 +132,7 @@ unsigned MoviePlayer::getCurrFrameNum() const
 // Returns: The overall number of frames in the movie
 unsigned int MoviePlayer::getNumFrames() const
 {
+    //return total number of frames
     return mFilm.size();
 }
 
