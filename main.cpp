@@ -15,8 +15,15 @@ void getCurrFrame(GTerminal& term, MoviePlayer& mp)
     term.clear();
     //current frame
     std::string frame = mp.getCurrFrame();
+    //create stringstream of frame
+    std::stringstream ss(frame);
     //add lines of text from MoviePlayer's getCurrFrame to the terminal
-    term.appendText(frame);
+    for(int i = 0; i < mp.getFrameSize(); i++)
+    {
+        std::string line = "";
+        std::getline(ss, line);
+        term.appendText(line + "\n");
+    }
 }
 
 int main(int argc, const char* argv[])
