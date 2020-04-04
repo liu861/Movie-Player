@@ -65,42 +65,30 @@ public:
         // ++i
         Iterator& operator++()
         {
-            if(mCurr->mNext)
-            {
-                mCurr = mCurr->mNext;
-                return *this;
-            }
+            mCurr = mCurr->mNext;
+            return *this;
 		}
         
         // i++
         Iterator operator++(int)
         {
             Iterator plus(*this);
-            if(mCurr->mNext)
-            {
-                mCurr = mCurr->mNext;
-            }
+            mCurr = mCurr->mNext;
             return plus;
 		}
         
         // --i
         Iterator& operator--()
         {
-            if(mCurr->mPrev)
-            {
-                mCurr = mCurr->mPrev;
-                return *this;
-            }
+            mCurr = mCurr->mPrev;
+            return *this;
 		}
         
         // i--
         Iterator operator--(int)
         {
             Iterator minus(*this);
-            if(mCurr->mPrev)
-            {
-                mCurr = mCurr->mPrev;
-            }
+            mCurr = mCurr->mPrev;
             return minus;
 		}
         
