@@ -177,7 +177,7 @@ void MoviePlayer::loadTape()
                 //get each line of frame
                 std::getline(ifile, line);
                 //add each line to frames
-                if(line.back() == '\\')
+                if(!line.empty() && line.back() == '\\')
                 {
                     line += " ";
                 }
