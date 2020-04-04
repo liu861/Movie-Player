@@ -170,6 +170,9 @@ public:
         {
             pop_front();
         }
+        mSize = 0;
+        mHead = nullptr;
+        mTail = nullptr;
 	}
     
     // Assignment Operator
