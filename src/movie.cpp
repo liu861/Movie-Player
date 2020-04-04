@@ -39,7 +39,7 @@ MoviePlayer::~MoviePlayer()
 // Returns: Nothing
 void MoviePlayer::goFwrd()
 {
-    if(pos->mNext)
+    if(pos->mNext != nullptr)
     {
         //increment currFrameNum counter
         currFrameNum++;
@@ -56,7 +56,7 @@ void MoviePlayer::goFwrd()
 // Returns: Nothing
 void MoviePlayer::goBack()
 {
-    if(pos->mPrev)
+    if(pos->mPrev != nullptr)
     {
         //decrement currFrameNum counter
         currFrameNum--;
@@ -96,7 +96,7 @@ void MoviePlayer::delCurrFrame()
 {
     //delete current frame
     //move tape forward by 1 frame
-    if(pos->mNext)
+    if(pos->mNext != nullptr)
     {
         //erase returns an iterator to after, so store this back in pos
         pos = mFilm.erase(pos);
@@ -198,7 +198,7 @@ void MoviePlayer::loadTape()
                     break;
                 }
                 //fill ITPDoubleList with images
-                mFilm.push_back(frame);;
+                mFilm.push_back(frame);
             }
         }
     }
