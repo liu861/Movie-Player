@@ -65,33 +65,43 @@ public:
         // ++i
         Iterator& operator++()
         {
-            mCurr = mCurr->mNext;
-			return *this;
+            if(mCurr->mNext)
+            {
+                mCurr = mCurr->mNext;
+                return *this;
+            }
 		}
         
         // i++
         Iterator operator++(int)
         {
-            Iterator plus(*this);
-            mCurr = mCurr->mNext;
-			return plus;
+            if(mCurr->mNext)
+            {
+                Iterator plus(*this);
+                mCurr = mCurr->mNext;
+                return plus;
+            }
 		}
         
         // --i
         Iterator& operator--()
         {
-			// TODO: Implement
-            mCurr = mCurr->mPrev;
-            return *this;
+            if(mCurr->mPrev)
+            {
+                mCurr = mCurr->mPrev;
+                return *this;
+            }
 		}
         
         // i--
         Iterator operator--(int)
         {
-			// TODO: Implement
-            Iterator minus(*this);
-            mCurr = mCurr->mPrev;
-			return minus;
+            if(mCurr->mPrev)
+            {
+                Iterator minus(*this);
+                mCurr = mCurr->mPrev;
+                return minus;
+            }
 		}
         
         // Dereference
