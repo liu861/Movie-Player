@@ -75,12 +75,12 @@ public:
         // i++
         Iterator operator++(int)
         {
+            Iterator plus(*this);
             if(mCurr->mNext)
             {
-                Iterator plus(*this);
                 mCurr = mCurr->mNext;
-                return plus;
             }
+            return plus;
 		}
         
         // --i
@@ -96,12 +96,12 @@ public:
         // i--
         Iterator operator--(int)
         {
+            Iterator minus(*this);
             if(mCurr->mPrev)
             {
-                Iterator minus(*this);
                 mCurr = mCurr->mPrev;
-                return minus;
             }
+            return minus;
 		}
         
         // Dereference
